@@ -1,0 +1,54 @@
+{
+  "entities": {
+    "BarcodeHistory": {
+      "title": "Barcode History",
+      "description": "Historical record of generated barcodes per user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "config": {
+          "type": "object",
+          "properties": {
+            "value": { "type": "string" },
+            "format": { "type": "string" },
+            "lineColor": { "type": "string" },
+            "background": { "type": "string" },
+            "width": { "type": "number" },
+            "height": { "type": "number" },
+            "margin": { "type": "number" },
+            "displayValue": { "type": "boolean" },
+            "fontSize": { "type": "number" },
+            "font": { "type": "string" },
+            "textAlign": { "type": "string" },
+            "textPosition": { "type": "string" },
+            "textMargin": { "type": "number" }
+          },
+          "required": ["value", "format"]
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "config", "createdAt"]
+    },
+    "Admin": {
+      "title": "Admin User",
+      "description": "Registry of users with administrative privileges",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    }
+  },
+  "firestore": {
+    "/history/{historyId}": {
+      "schema": "BarcodeHistory",
+      "description": "Root collection for all barcode history entries"
+    },
+    "/admins/{uid}": {
+      "schema": "Admin",
+      "description": "Mapping of UIDs to admin status"
+    }
+  }
+}
